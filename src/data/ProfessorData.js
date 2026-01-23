@@ -2,7 +2,7 @@
 const professorData = {
   "name": "김남기",
   "role": "교수 / SW안전보안전공 주임교수",
-  "image": "/assets/pro_Kim-ver2.jpg",
+  "image": process.env.PUBLIC_URL + "/assets/pro_Kim-ver2.jpg",
   "contact": {
     "email": "ngkim@kyonggi.ac.kr",
     "phone": "031-249-9662",

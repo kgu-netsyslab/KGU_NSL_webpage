@@ -21,9 +21,9 @@ const AlbumPage = lazy(() => import("./pages/AlbumPage"));
 const PublicationsPage = lazy(() => import("./pages/PublicationsPage"));
 
 // 이미지 경로 설정
-const swLogo = "/assets/SW_logo.png"; // SW중심대학 로고
-const mainBgImage = "/assets/main-bg.jpg"; // 메인 배경 이미지
-const logoImage = "/assets/logo.png"; // 연구실 로고 이미지
+const swLogo = (process.env.PUBLIC_URL + "/assets/SW_logo.png"); // SW중심대학 로고
+const mainBgImage = (process.env.PUBLIC_URL + "/assets/main-bg.jpg"); // 메인 배경 이미지
+const logoImage = (process.env.PUBLIC_URL + "/assets/logo.png"); // 연구실 로고 이미지
 
 // 해시 스크롤 감지 컴포넌트 (상세 페이지 -> 메인 이동 시 자동 스크롤)
 const ScrollToHashElement = () => {
