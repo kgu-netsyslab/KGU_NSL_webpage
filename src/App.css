@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+  border: 2px solid rgba(249, 17, 17, 0.5); /* 붉은색 경계선 살짝 노출 */
+}
+
+@keyframes slideUpFade {
+  0% { transform: translate(-50%, 20%); opacity: 0; }
+  50% { opacity: 0.3; }
+  100% { transform: translate(-50%, -100%); opacity: 0; }
+}
+
+@keyframes slideDownFade {
+  0% { transform: translate(-50%, -120%); opacity: 0; }
+  50% { opacity: 0.3; }
+  100% { transform: translate(-50%, 0%); opacity: 0; }
+}
+
+.year-silhouette-up {
+  animation: slideUpFade 1.2s ease-out forwards;
+}
+
+.year-silhouette-down {
+  animation: slideDownFade 1.2s ease-out forwards;
+}
