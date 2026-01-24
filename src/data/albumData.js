@@ -10,8 +10,8 @@ const albumData = {
                 { id: 11, type: "", title: "국제 학술대회 참가", date: "2025.12", image: process.env.PUBLIC_URL + "/assets/album_IMGS/정글.jpeg", participants: "박태경, 곽윤석" },
                 { id: 10, type: "image", title: "캡스톤 디자인 경진대회", date: "2025.05", image: process.env.PUBLIC_URL + "/assets/album_IMGS/캡스톤.jpg", participants: "이수민, 장예진, 김도현, 최민서" },
                 { id: 9, type: "image", title: "SW중심대학 페스티벌", date: "2025.10", image: process.env.PUBLIC_URL + "/assets/album_IMGS/sw페스티벌.jpg", participants: "김민재, 오지현, 한지훈" },
-                { id: 8, type: "image", title: "졸업생 환송회", date: "2025.12", image: process.env.PUBLIC_URL + "/assets/album_IMGS/정글.jpeg", participants: "전체 연구실 구성원" },
-                { id: 7, type: "video", title: "연구실 MT", date: "2025.03", videoUrl: process.env.PUBLIC_URL + "/assets/album_IMGS/트린용스틸.webm", Thumbnail: "", participants: "전체 연구실 구성원" },
+                { id: 8, type: "image", title: "졸업생 환송회", date: "2025.12", image: process.env.PUBLIC_URL + "/assets/album_IMGS/2021경기대 전기 학위수여식.jpg", participants: "전체 연구실 구성원" },
+                { id: 7, type: "video", title: "연구실 홈피 개발기록", date: "2025.03", videoUrl: process.env.PUBLIC_URL + "/assets/album_IMGS/연구실 홈피 프로토타입1080.mp4", Thumbnail: "", participants: "박태경" },
             ]
         },
         {
