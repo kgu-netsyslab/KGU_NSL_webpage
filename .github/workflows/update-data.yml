@@ -63,7 +63,7 @@ jobs:
       - name: Deploy to GitHub Pages
         if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          run: CI=false npm run build
+          CI=false npm run build
           # gh-pages 패키지 대신 git 명령어로 직접 배포 (봇 권한 문제 해결용)
           git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
