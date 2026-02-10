@@ -1,0 +1,69 @@
+name: Publications Auto Update & Deploy
+# 설명: 매주 월요일 09시에 연구실적 데이터를 자동 갱신하고 GitHub Pages에 재배포합니다.
+on:
+  schedule:
+    - cron: "00 00 * * 1" # 한국 시간은 +9시간, 매주 월요일 9:00 (KST)
+  workflow_dispatch: # 수동 실행 버튼
+
+permissions:
+  contents: write # 저장소 쓰기 권한
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # 1. Puppeteer 관련 패키지 설치
+      - name: Install Puppeteer Deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates fonts-liberation libasound2t64 \
+          libatk-bridge2.0-0 libatk1.0-0 libc6 libc6-dev libcairo2 libcups2 \
+          libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 \
+          libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 \
+          libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 \
+          libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 \
+          libxss1 libxtst6 lsb-release wget xdg-utils
+
+      # 2. 프로젝트 의존성 설치
+      - name: Install Dependencies
+        run: npm install
+
+      # 3. 크롤러 실행 (데이터 갱신)
+      - name: Run Scraper
+        run: node scripts/update-pubs.js
+
+      # 4. 데이터 변경 감지 및 커밋
+      - name: Check & Commit Changes
+        id: git-check
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add src/data/*.js
+
+          # 변경 사항이 있으면 커밋
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "변경된 데이터가 없습니다."
+          else
+            git commit -m "docs: 연구실적 업데이트 및 재배포"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      # 5. [중요] 변경 사항이 있거나 수동 실행일 때 -> 사이트 재배포
+      # (데이터가 바뀌면 화면도 새로고침 되어야 하므로 build & deploy 수행)
+      - name: Deploy to GitHub Pages
+        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          CI=false npm run build
+          # gh-pages 패키지 대신 git 명령어로 직접 배포 (봇 권한 문제 해결용)
+          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"

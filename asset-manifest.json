@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/KGU_NSL_webpage/static/css/main.f8b213bc.css",
+    "main.js": "/KGU_NSL_webpage/static/js/main.8fdb3f25.js",
+    "static/js/329.7ba90687.chunk.js": "/KGU_NSL_webpage/static/js/329.7ba90687.chunk.js",
+    "static/js/273.868d8f60.chunk.js": "/KGU_NSL_webpage/static/js/273.868d8f60.chunk.js",
+    "static/js/235.878359df.chunk.js": "/KGU_NSL_webpage/static/js/235.878359df.chunk.js",
+    "static/js/233.51c524d1.chunk.js": "/KGU_NSL_webpage/static/js/233.51c524d1.chunk.js",
+    "static/js/649.31ee8904.chunk.js": "/KGU_NSL_webpage/static/js/649.31ee8904.chunk.js",
+    "static/js/757.1a9cf04e.chunk.js": "/KGU_NSL_webpage/static/js/757.1a9cf04e.chunk.js",
+    "static/js/194.fdc9323d.chunk.js": "/KGU_NSL_webpage/static/js/194.fdc9323d.chunk.js",
+    "static/js/206.59bc9a1f.chunk.js": "/KGU_NSL_webpage/static/js/206.59bc9a1f.chunk.js",
+    "static/js/989.2beccebc.chunk.js": "/KGU_NSL_webpage/static/js/989.2beccebc.chunk.js",
+    "static/js/451.05182872.chunk.js": "/KGU_NSL_webpage/static/js/451.05182872.chunk.js",
+    "static/js/61.50b25231.chunk.js": "/KGU_NSL_webpage/static/js/61.50b25231.chunk.js",
+    "index.html": "/KGU_NSL_webpage/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.f8b213bc.css",
+    "static/js/main.8fdb3f25.js"
+  ]
+}
