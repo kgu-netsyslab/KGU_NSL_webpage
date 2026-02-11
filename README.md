@@ -4,9 +4,7 @@
 
 https://kgu-netsyslab.github.io/KGU_NSL_webpage/#/
 
-## Getting Started with Create React App
-
-This project was bootstrapped with [Create React App]. (https://react.dev/)
+### This project was bootstrapped with [Create React App]. (https://react.dev/)
 
 ## Available Scripts
 
