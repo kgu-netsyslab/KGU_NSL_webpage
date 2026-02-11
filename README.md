@@ -2,9 +2,11 @@
 
 경기대학교 네트워크 시스템 연구실
 
+https://kgu-netsyslab.github.io/KGU_NSL_webpage/#/
+
 ## Getting Started with Create React App
 
-This project was bootstrapped with [Create React App].
+This project was bootstrapped with [Create React App]. (https://react.dev/)
 
 ## Available Scripts
 
