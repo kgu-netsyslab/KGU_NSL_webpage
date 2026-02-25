@@ -1,10 +1,12 @@
 # Kyonggi University Network System Laboratory Webpage
 
-경기대학교 네트워크 시스템 연구실
+경기대학교 네트워크 시스템 연구실 (Ctrl + 클릭 시 새 탭에서 열림)
 
 https://kgu-netsyslab.github.io/KGU_NSL_webpage/#/
 
-## `This project was bootstrapped with [Create React App]. (https://react.dev/)`
+## `This project was bootstrapped with [Create React App].`
+
+https://react.dev/
 
 ## Available Scripts
 
@@ -17,7 +19,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 

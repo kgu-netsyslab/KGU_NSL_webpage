@@ -21,7 +21,8 @@ const PublicationsPage = lazy(() => import("./pages/PublicationsPage copy"));
 // 이미지 경로 설정
 const swLogo = (process.env.PUBLIC_URL + "/assets/SW_logo.png"); // SW중심대학 로고
 const mainBgImage = (process.env.PUBLIC_URL + "/assets/main-bg.jpg"); // 메인 배경 이미지
-const logoImage = (process.env.PUBLIC_URL + "/assets/logo.png"); // 연구실 로고 이미지
+const logoImage = (process.env.PUBLIC_URL + "/assets/logo-without-bg.png"); // 연구실 로고 이미지
+const csLogo = (process.env.PUBLIC_URL + "/assets/logo.png"); // 컴퓨터공학과 로고 이미지
 
 // 해시 스크롤 감지 컴포넌트 (상세 페이지 -> 메인 이동 시 자동 스크롤)
 const ScrollToHashElement = () => {
@@ -63,7 +64,7 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
     <header className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-md">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* 좌측 로고 영역 */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-5">
           <Link
             to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -72,6 +73,13 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
             <img src={logoImage} alt="로고" className="h-10" />
           </Link>
           <div className="h-6 w-px bg-gray-300 mx-1"></div>
+          <a
+            href="https://www.kyonggi.ac.kr/u_computer/index.do" // 컴퓨터공학전공 웹사이트 링크
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={csLogo} alt="컴퓨터공학과" className="h-9 w-auto object-contain" />
+          </a>
           {/* SW중심대학 로고 링크 봉인}
           <a
             href="https://swuniv.kyonggi.ac.kr/index" // SW중심대학 공식 웹사이트 링크
