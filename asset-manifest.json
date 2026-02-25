@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/KGU_NSL_webpage/static/css/main.f8b213bc.css",
-    "main.js": "/KGU_NSL_webpage/static/js/main.8fdb3f25.js",
+    "main.js": "/KGU_NSL_webpage/static/js/main.88b30227.js",
     "static/js/329.7ba90687.chunk.js": "/KGU_NSL_webpage/static/js/329.7ba90687.chunk.js",
     "static/js/273.868d8f60.chunk.js": "/KGU_NSL_webpage/static/js/273.868d8f60.chunk.js",
     "static/js/235.878359df.chunk.js": "/KGU_NSL_webpage/static/js/235.878359df.chunk.js",
@@ -17,6 +17,6 @@
   },
   "entrypoints": [
     "static/css/main.f8b213bc.css",
-    "static/js/main.8fdb3f25.js"
+    "static/js/main.88b30227.js"
   ]
 }
