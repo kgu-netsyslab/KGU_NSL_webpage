@@ -199,3 +199,4 @@ async function updatePublications() {
 }
 
 updatePublications();
+// End of file
