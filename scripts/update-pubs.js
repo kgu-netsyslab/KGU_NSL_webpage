@@ -24,6 +24,8 @@ function getExistingDataCount(filePath) {
 
 async function updatePublications() {
     let browser;
+    let page; // [수정] catch 블록에서 에러 스크린샷을 찍기 위해 page 변수 스코프를 상단으로 이동
+
     try {
         console.log("🚀 [1단계] 가상 브라우저 실행 중...");
 
@@ -32,21 +34,25 @@ async function updatePublications() {
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
 
-        const page = await browser.newPage();
+        page = await browser.newPage();
         await page.setViewport({ width: 1280, height: 800 }); // 화면 크기 설정 (버튼 클릭 위해)
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
 
-        console.log("🚀 [2단계] 페이지 접속 중...");
+        console.log("🚀 [2단계] 페이지 접속 및 동적 데이터 렌더링 대기 중...");
         await page.goto(CONFIG.url, { waitUntil: 'networkidle2', timeout: 60000 });
 
-        // 1차 디버깅 파일 저장 (접속 직후)
+        // [핵심 로직 추가] 학교 서버에서 AJAX로 교수진 데이터를 가져와 화면에 그릴 때까지 명시적으로 대기
+        // 네트워크 상태에 따라 렌더링 속도가 다를 수 있으므로, 하드코딩된 시간 대신 요소가 나타날 때까지 기다립니다 (최대 15초).
+        await page.waitForSelector('.employee_item', { visible: true, timeout: 15000 });
+        console.log("✅ 데이터 렌더링 완료.");
+
+        // 1차 디버깅 파일 저장 (접속 및 렌더링 직후)
         fs.writeFileSync('debug_step1_load.html', await page.content());
         console.log("📸 [디버깅] 접속 직후 화면 저장 완료 (debug_step1_load.html)");
 
         console.log("🔍 [3단계] '김남기' 교수님 찾는 중...");
 
         // Puppeteer 컨텍스트에서 요소 찾기 및 클릭
-        // page.evaluate를 사용하여 브라우저 내부에서 DOM을 직접 탐색
         const found = await page.evaluate(async () => {
             const items = document.querySelectorAll('.employee_item');
             for (const item of items) {
@@ -69,8 +75,7 @@ async function updatePublications() {
 
         console.log("🖱️ [3단계] 상세보기 버튼 클릭 완료. 데이터 로딩 대기...");
 
-        // 데이터가 로딩될 때까지 잠시 대기 (7초)
-        // 네트워크 요청이 발생하므로 넉넉히 기다림
+        // 논문 데이터가 로딩될 때까지 잠시 대기 (7초)
         await new Promise(r => setTimeout(r, 7000));
 
         // 2차 디버깅 파일 저장 (클릭 후)
@@ -83,7 +88,6 @@ async function updatePublications() {
         console.log("✅ [4단계] 데이터 파싱 시작.");
 
         // 클릭했으므로 active 클래스가 붙은 상태의 DOM을 파싱
-        // 주의: 클릭 후 구조가 변경되었을 수 있으므로 다시 타겟팅
         let targetSection = null;
         $('.employee_item').each((i, el) => {
             const name = $(el).find('.name_wrap .name').first().text().trim();
@@ -113,6 +117,7 @@ async function updatePublications() {
                     return false;
                 }
             });
+            
             // 해당 섹션에서 논문/저서 리스트 추출
             if (targetBox) {
                 targetBox.find('ul.num > li').each((i, li) => {
@@ -170,8 +175,22 @@ async function updatePublications() {
         }
 
     } catch (error) {
+        // [선제적 에러 핸들링 추가] 타임스탬프를 부여한 전체 화면 캡처
+        let errorImagePath = "캡처 실패";
+        if (page && !page.isClosed()) {
+            try {
+                const timestamp = new Date().toISOString().replace(/[:T.]/g, '-').slice(0, 19);
+                errorImagePath = path.join(__dirname, `../error_dump_${timestamp}.png`);
+                await page.screenshot({ path: errorImagePath, fullPage: true });
+            } catch (captureError) {
+                console.error("📸 스크린샷 캡처 중 시스템 오류:", captureError.message);
+            }
+        }
+
         console.error("\n========================================");
         console.error("🚨 오류 발생:", error.message);
+        console.error(`📸 [디버깅] 에러 시점의 전체 화면이 저장되었습니다: ${errorImagePath}`);
+        console.error("💡 조치 사항: 캡처된 이미지를 확인하여 학교 서버 지연(빈 화면)인지, 사이트 개편(구조 변경)인지 파악하세요.");
         console.error("========================================\n");
         process.exit(1);
     } finally {
@@ -180,4 +199,3 @@ async function updatePublications() {
 }
 
 updatePublications();
-// End of file
