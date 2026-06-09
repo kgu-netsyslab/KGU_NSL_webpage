@@ -36,7 +36,7 @@ const GraduatesPage = () => {
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">명예의 전당</h2>
           <h2 className="text-4xl md:text-1 font-italic text-blue-600 mb-6">Hall of Fame</h2>
           <p className="text-lg text-gray-600 leading-relaxed">
-            Smart IoT 연구실의 혁신을 이끌어온 자랑스러운 졸업생들입니다.<br />
+            Network System 연구실의 혁신을 이끌어온 자랑스러운 졸업생들입니다.<br />
             다양한 산업 현장과 학계에서 연구실의 가치를 빛내고 있습니다.
           </p>
         </div>
