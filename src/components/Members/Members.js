@@ -300,8 +300,8 @@ const Members = () => {
           {students.master.length <= 1 && (
             <div className="text-center mt-10 p-8 bg-blue-50/50 rounded-lg max-w-2xl mx-auto">
               <p className="text-gray-600 text-sm">
-                "우리 연구실은 소수 정예로 운영되어 교수님의 밀착 지도를 받을 수 있습니다.<br />
-                여러분의 합류를 기다립니다."
+                우리 연구실은 소수 정예로 운영되어 교수님의 밀착 지도를 받을 수 있습니다.<br />
+                여러분의 합류를 기다립니다.
               </p>
             </div>
           )}

@@ -1,13 +1,20 @@
 // 대학원생 데이터
 const students = {
     master: [
-    { 
-        id: 1, 
-        name: "곽윤석", 
-        image: "https://placehold.co/300x300/EFEFEF/AAAAAA?text=Student", 
-        interests: "Unity 게임 개발", 
-        type: "석사과정" 
-    },
+        { 
+            id: 1, 
+            name: "곽윤석", 
+            image: "https://placehold.co/300x300/EFEFEF/AAAAAA?text=Master's-level", 
+            interests: "Data scientist, Deep learning", 
+            type: "석사과정" 
+        },
+        /*{ 예비 마킹 
+            id: 2, 
+            name: "김민규", 
+            image: "https://placehold.co/300x300/EFEFEF/AAAAAA?text=Master's-level", 
+            interests: "인공지능, 머신러닝", 
+            type: "석사과정" 
+        }*/
     ],
 };
 
