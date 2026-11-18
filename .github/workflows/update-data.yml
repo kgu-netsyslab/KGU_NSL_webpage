@@ -1,5 +1,6 @@
 name: Publications Auto Update & Deploy
 # 설명: 매주 월요일 09시에 연구실적 데이터를 자동 갱신하고 GitHub Pages에 재배포합니다.
+# 논문이 그대로여도 .github/last-run.json을 push해서, 공개 저장소 스케줄이 60일 만에 꺼지지 않게 합니다.
 on:
   schedule:
     - cron: "00 00 * * 1" # 한국 시간은 +9시간, 매주 월요일 9:00 (KST)
@@ -38,30 +39,53 @@ jobs:
 
       # 3. 크롤러 실행 (데이터 갱신)
       - name: Run Scraper
+        id: scrape
         run: node scripts/update-pubs.js
 
-      # 4. 데이터 변경 감지 및 커밋
+      # 4. 실행 기록은 성공/실패와 관계없이 push한다.
+      #    논문 JS는 크롤이 성공하고 내용이 바뀐 경우에만 함께 커밋한다.
       - name: Check & Commit Changes
         id: git-check
+        if: always() && !cancelled()
+        env:
+          SCRAPE_STATUS: ${{ steps.scrape.outcome }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add src/data/*.js
 
-          # 변경 사항이 있으면 커밋
-          if git diff --staged --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "변경된 데이터가 없습니다."
-          else
-            git commit -m "docs: 연구실적 업데이트 및 재배포"
-            git push
-            echo "changed=true" >> $GITHUB_OUTPUT
+          CHANGED=false
+          if [ "$SCRAPE_STATUS" = "success" ]; then
+            git add src/data/*.js
+            if ! git diff --staged --quiet; then
+              CHANGED=true
+            fi
           fi
+          echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
 
-      # 5. [중요] 변경 사항이 있거나 수동 실행일 때 -> 사이트 재배포
-      # (데이터가 바뀌면 화면도 새로고침 되어야 하므로 build & deploy 수행)
+          PUBLICATIONS_CHANGED="$CHANGED" node <<'NODE'
+          const fs = require('fs');
+          const payload = {
+            ranAt: new Date().toISOString(),
+            status: process.env.SCRAPE_STATUS || 'unknown',
+            event: process.env.EVENT_NAME || null,
+            publicationsChanged: process.env.PUBLICATIONS_CHANGED === 'true'
+          };
+          fs.writeFileSync('.github/last-run.json', JSON.stringify(payload, null, 2) + '\n');
+          NODE
+
+          git add .github/last-run.json
+          if [ "$CHANGED" = "true" ]; then
+            git commit -m "docs: 연구실적 업데이트 및 재배포"
+          else
+            git commit -m "chore: 논문 크롤 실행 기록"
+          fi
+          git push
+
+      # 5. 논문 데이터가 바뀌었거나 수동 실행일 때만 재배포한다.
+      #    if를 직접 쓰면 기본 success()가 빠지므로, 크롤 실패 시 배포되지 않게 다시 붙인다.
       - name: Deploy to GitHub Pages
-        if: steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: success() && (steps.git-check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch')
         run: |
           CI=false npm run build
           # gh-pages 패키지 대신 git 명령어로 직접 배포 (봇 권한 문제 해결용임)
