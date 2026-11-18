@@ -1,6 +1,6 @@
 {
-  "ranAt": null,
-  "status": "never",
-  "event": null,
-  "publicationsChanged": false
+  "ranAt": "2026-11-18T08:47:36.387Z",
+  "status": "success",
+  "event": "workflow_dispatch",
+  "publicationsChanged": true
 }
