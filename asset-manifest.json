@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/KGU_NSL_webpage/static/css/main.f8b213bc.css",
-    "main.js": "/KGU_NSL_webpage/static/js/main.6256bd63.js",
+    "main.js": "/KGU_NSL_webpage/static/js/main.d8316961.js",
     "static/js/329.7ba90687.chunk.js": "/KGU_NSL_webpage/static/js/329.7ba90687.chunk.js",
     "static/js/273.868d8f60.chunk.js": "/KGU_NSL_webpage/static/js/273.868d8f60.chunk.js",
-    "static/js/235.84e1b060.chunk.js": "/KGU_NSL_webpage/static/js/235.84e1b060.chunk.js",
+    "static/js/235.dab8f032.chunk.js": "/KGU_NSL_webpage/static/js/235.dab8f032.chunk.js",
     "static/js/233.51c524d1.chunk.js": "/KGU_NSL_webpage/static/js/233.51c524d1.chunk.js",
     "static/js/649.31ee8904.chunk.js": "/KGU_NSL_webpage/static/js/649.31ee8904.chunk.js",
     "static/js/757.c62710d6.chunk.js": "/KGU_NSL_webpage/static/js/757.c62710d6.chunk.js",
@@ -17,6 +17,6 @@
   },
   "entrypoints": [
     "static/css/main.f8b213bc.css",
-    "static/js/main.6256bd63.js"
+    "static/js/main.d8316961.js"
   ]
 }
