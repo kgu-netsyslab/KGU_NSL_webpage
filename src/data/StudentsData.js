@@ -16,7 +16,7 @@ const students = {
             type: "석사과정",
         }*/
     {
-      id: 2,
+      id: 3,
       name: "박태경",
       image:
         process.env.PUBLIC_URL + "/assets/members/Undergraduate_level_Park.jpg",
@@ -24,16 +24,16 @@ const students = {
       type: "학부연구생",
     },
     {
-      id: 3,
+      id: 4,
       name: "김지우",
-      image: "https://placehold.co/256x256/EFEFEF/AAAAAA?text=Kim+Jiwoo",
-      //process.env.PUBLIC_URL + "/assets/members/Undergraduate_level_Kim.png",
+      image: process.env.PUBLIC_URL + "/assets/members/Undergraduate_level_Kim.png",
+      //"https://placehold.co/256x256/EFEFEF/AAAAAA?text=Kim+Jiwoo", _ 이미지 대체본
       interests: "Deep learning, Object Detection",
       type: "학부연구생",
     },
     /*{
-      id: 4,
-      name: "김민재",
+      id: 5, 더미 데이터
+      name: "유왕명헌",
       image: "https://placehold.co/256x256/EFEFEF/AAAAAA?text=Kim+Minjae",
       interests: "Deep learning, Object Detection",
       type: "학부연구생",
