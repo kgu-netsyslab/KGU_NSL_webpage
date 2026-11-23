@@ -1,6 +1,6 @@
 {
-  "ranAt": "2026-11-18T08:47:36.387Z",
+  "ranAt": "2026-11-23T06:41:27.455Z",
   "status": "success",
-  "event": "workflow_dispatch",
-  "publicationsChanged": true
+  "event": "schedule",
+  "publicationsChanged": false
 }
